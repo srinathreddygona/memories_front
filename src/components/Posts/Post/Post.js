@@ -15,16 +15,16 @@ const Post=({post,setCurrentId})=>{
     const dispatch=useDispatch();
      const user=JSON.parse(localStorage.getItem('profile'));
     const Likes=()=>{
-        if (post.likes.length > 0) {
-            return post.likes.find((like) => like === (user?.result?.googleId || user?.result?._id))
-              ? (
-                <><ThumbUpAltIcon fontSize="small" />&nbsp;{post.likes.length > 2 ? `You and ${post.likes.length - 1} others` : `${post.likes.length} like${post.likes.length > 1 ? 's' : ''}` }</>
-              ) : (
-                <><ThumbUpAltOutlined fontSize="small" />&nbsp;{post.likes.length} {post.likes.length === 1 ? 'Like' : 'Likes'}</>
-              );
-          }
-      
-          return <><ThumbUpAltOutlined fontSize="small" />&nbsp;Like</>;
+        const likes = post.likes || [];  // Default to an empty array if post.likes is undefined
+    if (likes.length > 0) {
+        return likes.find((like) => like === (user?.result?.googleId || user?.result?._id))
+            ? (
+                <><ThumbUpAltIcon fontSize="small" />&nbsp;{likes.length > 2 ? `You and ${likes.length - 1} others` : `${likes.length} like${likes.length > 1 ? 's' : ''}` }</>
+            ) : (
+                <><ThumbUpAltOutlined fontSize="small" />&nbsp;{likes.length} {likes.length === 1 ? 'Like' : 'Likes'}</>
+            );
+    }
+    return <><ThumbUpAltOutlined fontSize="small" />&nbsp;Like</>;
     }
 
 
