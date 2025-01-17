@@ -17,7 +17,7 @@ const Post=({post,setCurrentId})=>{
     const Likes=()=>{
         const likes = post.likes || [];  // Default to an empty array if post.likes is undefined
     if (likes.length > 0) {
-        return likes.find((like) => like === (user?.result?.googleId || user?.result?._id))
+        return likes.find((like) => like === (user?.result?.sub || user?.result?._id))
             ? (
                 <><ThumbUpAltIcon fontSize="small" />&nbsp;{likes.length > 2 ? `You and ${likes.length - 1} others` : `${likes.length} like${likes.length > 1 ? 's' : ''}` }</>
             ) : (
