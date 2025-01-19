@@ -18,6 +18,7 @@ export default makeStyles((theme) => ({
   },
   section: {
     borderRadius: '20px',
+   
     margin: '10px',
     flex: 1,
   },
