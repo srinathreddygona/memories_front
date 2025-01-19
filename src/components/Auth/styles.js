@@ -25,14 +25,15 @@ export default makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
   googleButton: {
+    marginBottom: theme.spacing(2),
     backgroundColor: '#4285F4',  // Google Blue color
-        color: 'white',
-        fontSize: '16px',
-        fontWeight: 'bold',
-        padding: '10px',
-        borderRadius: '8px',
-        '&:hover': {
-            backgroundColor: '#357ae8',  // Darker blue on hover
-        },
+    color: 'white',
+    fontSize: '16px',
+    fontWeight: 'bold',
+    padding: '10px',
+    borderRadius: '8px',
+    '&:hover': {
+      backgroundColor: '#357ae8',  // Darker blue on hover
+    },
   },
 }));

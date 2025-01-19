@@ -1,5 +1,5 @@
 import React from "react";
-import { Card,CardActions,CardContent,CardMedia,Button,Typography } from "@material-ui/core";
+import { Card,CardActions,CardContent,CardMedia,Button,Typography, ButtonBase } from "@material-ui/core";
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import ThumbUpAltOutlined from '@material-ui/icons/ThumbUpAltOutlined';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -9,15 +9,16 @@ import useStyles from './styles';
 import { useDispatch } from "react-redux";
 
 import { deletePost,likePost } from "../../../actions/posts"; 
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const Post=({post,setCurrentId})=>{
     const classes=useStyles();
     const dispatch=useDispatch();
-     const user=JSON.parse(localStorage.getItem('profile'));
+    const user=JSON.parse(localStorage.getItem('profile'));
     const Likes=()=>{
         const likes = post.likes || [];  // Default to an empty array if post.likes is undefined
     if (likes.length > 0) {
-        return likes.find((like) => like === (user?.result?.googleId || user?.result?._id))
+        return likes.find((like) => like === (user?.result?.sub || user?.result?._id))
             ? (
                 <><ThumbUpAltIcon fontSize="small" />&nbsp;{likes.length > 2 ? `You and ${likes.length - 1} others` : `${likes.length} like${likes.length > 1 ? 's' : ''}` }</>
             ) : (
@@ -26,11 +27,17 @@ const Post=({post,setCurrentId})=>{
     }
     return <><ThumbUpAltOutlined fontSize="small" />&nbsp;Like</>;
     }
-
-
+const history=useHistory();
+const openPost=()=>{   
+history.push(`/posts/${post._id}`);
+ }
 
     return(
-        <Card className={classes.card}>
+        <Card className={classes.card} raised elevation={6}>
+            <ButtonBase
+              className={classes.cardAction}
+              onClick={openPost}
+            >
             <CardMedia className={classes.media} image={post.selectedFile || "https://via.placeholder.com/150"} title={post.title}/>
             
             <div className={classes.overlay}>
@@ -57,6 +64,7 @@ const Post=({post,setCurrentId})=>{
             <Typography variant="body2"color="textSecondary" component="p" > {post.message}</Typography>
 
             </CardContent>
+            </ButtonBase>
 
             <CardActions className={classes.cardActions}>
                 <Button size="small" color="primary" disabled={!user?.result}onClick={()=>dispatch(likePost(post._id))}>

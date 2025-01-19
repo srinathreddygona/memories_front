@@ -11,15 +11,16 @@ export default makeStyles({
     border: 'solid',
   },
   fullHeightCard: {
-    height: '100%',
+    height: '10%',
   },
   card: {
     display: 'flex',
+    //left:'-50%',
     flexDirection: 'column',
     justifyContent: 'space-between',
     borderRadius: '15px',
     height: '100%',
-    position: 'relative',
+    position:'relative',
   },
   overlay: {
     position: 'absolute',
@@ -35,6 +36,7 @@ export default makeStyles({
   },
   grid: {
     display: 'flex',
+    //paddingLeft: '-10px', 
   },
   details: {
     display: 'flex',
@@ -48,5 +50,9 @@ export default makeStyles({
     padding: '0 16px 8px 16px',
     display: 'flex',
     justifyContent: 'space-between',
+  },
+  cardAction: {
+    display: 'block',
+    textAlign: 'initial',
   },
 });
