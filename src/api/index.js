@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 
-const API = axios.create({ baseURL:  'http://localhost:5000' });
+const API = axios.create({ baseURL:  'https://memories-back-postit.onrender.com' });
 // const url='https://memories-back-postit.onrender.com';
 
 
