@@ -23,8 +23,10 @@ export default makeStyles((theme) => ({
   },
   imageSection: {
     marginLeft: '20px',
+    flex:'0 0 600px',
     [theme.breakpoints.down('sm')]: {
       marginLeft: 0,
+      flex: '0 0 auto',
     },
   },
   recommendedPosts: {
