@@ -9,7 +9,7 @@ import useStyles from './styles';
 import { useDispatch } from "react-redux";
 
 import { deletePost,likePost } from "../../../actions/posts"; 
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory } from "react-router-dom";
 
 const Post=({post,setCurrentId})=>{
     const classes=useStyles();
