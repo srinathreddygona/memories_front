@@ -20,6 +20,5 @@ ReactDOM.render(
 </Provider>
 </GoogleOAuthProvider>
 ,document.getElementById('root')
-
 );
 
