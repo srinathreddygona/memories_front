@@ -12,7 +12,7 @@ import Auth from "./components/Auth/Auth";
 
 const App=()=>{  
   const user=JSON.parse(localStorage.getItem('profile'));
-  
+  console.log("Google Client ID:", process.env.REACT_APP_GOOGLE_CLIENT_ID,"say hi");
     return (
   
        <BrowserRouter>
