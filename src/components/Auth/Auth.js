@@ -41,8 +41,7 @@ const Auth = () => {
   };
 
   const googleSuccess = async (res) => {
-    console.log('Google Login Response:', res); // This should show the response object structure
-
+    console.log('Google Login Response:', res); 
     if (res?.credential) {
       const tokenId = res.credential;
       console.log('Token ID:', tokenId);
@@ -104,7 +103,7 @@ const Auth = () => {
             )}
           />
 
-          <Grid container justifyContent="flex-end">
+          <Grid container justifyContent="space-between">
             <Grid item>
               <Button onClick={switchMode}>
                 {isSignup ? 'Already have an account? Sign In!' : "Don't have an account? Sign Up"}

@@ -1,5 +1,5 @@
 import * as api from '../api';
-import { FETCH_ALL,DELETE,CREATE,UPDATE, FETCH_BY_SEARCH ,START_LOADING,END_LOADING,FETCH_POST,COMMENT} from '../constants/actiontypes';
+import { FETCH_ALL,DELETE,CREATE,UPDATE,FETCH_USER_POSTS, FETCH_BY_SEARCH ,START_LOADING,END_LOADING,FETCH_POST,COMMENT} from '../constants/actiontypes';
 
 //Action Creators
 
@@ -27,6 +27,27 @@ export const getPosts=(page)=> async(dispatch)=>{
         console.log(error.message);
     }
 };
+export const getUserPosts = (id, page) => async (dispatch) => {
+    try {
+        console.log(`📡 Fetching User Posts - User: ${id}, Page: ${page}`);
+        const { data } = await api.fetchUserPosts(id, page);
+
+        console.log("✅ API Response:", data);
+
+        dispatch({
+            type: "FETCH_USER_POSTS",
+            payload: {
+                data: data.data, 
+                currentPage: data.currentPage,
+                numberOfPages: data.numberOfPages,
+            },
+        });
+    } catch (error) {
+        console.error("❌ Error fetching user posts:", error);
+    }
+};
+
+
 export const getPostsBySearch=(searchQuery)=>async (dispatch) => {
     try {
         dispatch({type:START_LOADING});

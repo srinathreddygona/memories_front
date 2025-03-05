@@ -21,9 +21,34 @@ const Form=({currentId,setCurrentId})=>{
         if(post) setPostData(post);
 
     },[post]);
+    const [errors, setErrors] = useState({ title: false, message: false, tags: false });
+
+const validateForm = () => {
+    let isValid = true;
+    const newErrors = { title: false, message: false, tags: false };
+
+    if (!postData.title.trim()) {
+        newErrors.title = true;
+        isValid = false;
+    }
+    if (!postData.message.trim()) {
+        newErrors.message = true;
+        isValid = false;
+    }
+    if (postData.tags.length === 0 || postData.tags.join(',').trim() === '') { 
+        // Ensuring tags are not empty
+        newErrors.tags = true;
+        isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
+};
 
     const handleSubmit=(e)=>{
         e.preventDefault();
+
+    if (!validateForm()) return; 
         console.log("im here")
         if(currentId===0){
             
@@ -38,6 +63,7 @@ const Form=({currentId,setCurrentId})=>{
     const clear=()=>{
             setCurrentId(0);
             setPostData({ title:'',message:'',tags:'',selectedFile:''});
+            setErrors({ title: false, message: false, tags: false }); 
     }
 
 
@@ -56,11 +82,14 @@ const Form=({currentId,setCurrentId})=>{
     return(
         <Paper className={classes.Paper} raised elevation={6}>
             <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
-            <Typography variant="h6" >{currentId?'Editing ':'Creating '}a Memory..</Typography>
+            <Typography variant="h6" >{currentId?'Editing ':'Create '}a Memory..</Typography>
           
-            <TextField name="title" variant="outlined" label="Title" fullWidth value={postData.title} onChange={(e)=>setPostData({...postData,title:e.target.value})}/>
-            <TextField name="message" variant="outlined" label="Message" fullWidth multiline  value={postData.message} onChange={(e)=>setPostData({...postData,message:e.target.value})}/>
-            <TextField name="tags" variant="outlined" label="Tags (comma-separated)" fullWidth value={postData.tags} onChange={(e)=>setPostData({...postData, tags: e.target.value.split(',')})}/>
+            <TextField name="title" variant="outlined" label="Title" fullWidth value={postData.title} onChange={(e)=>setPostData({...postData,title:e.target.value})}  error={errors.title} 
+    helperText={errors.title ? "Title is required" : ""}/>
+            <TextField name="message" variant="outlined" label="Message" fullWidth multiline  value={postData.message} onChange={(e)=>setPostData({...postData,message:e.target.value})}error={errors.message} 
+    helperText={errors.message ? "Message is required" : ""} />
+            <TextField name="tags" variant="outlined" label="Tags (comma-separated)" fullWidth value={postData.tags} onChange={(e)=>setPostData({...postData, tags: e.target.value.split(',')})}error={errors.tags} 
+    helperText={errors.tags ? "At least one tag is required" : ""}/>
             <div className={classes.fileInput}>
                   <FileBase type="file" multiple={false} onDone={({base64})=>setPostData({...postData,selectedFile: base64})}/>
                   

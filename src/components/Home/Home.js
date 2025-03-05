@@ -62,7 +62,7 @@ const Home = () => {
                             <TextField
                              name="search" 
                              variant='outlined'
-                             label="Search Memories" 
+                             label="Search Posts" 
                              onKeyDown={handleKeyPress}
                              fullWidth
                              value ={search} 
@@ -73,7 +73,7 @@ const Home = () => {
                              value={tags}
                              onAdd={handleAdd}
                              onDelete={handleDelete}
-                             label="Search Tags"
+                             label="Search Tags(Press Enter to Add)"
                              variant='outlined'
                              
                              />
